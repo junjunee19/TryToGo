@@ -1,0 +1,42 @@
+<?xml version='1.0'?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+    "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="NoticeMapper">
+	
+	<typeAlias alias="str" type="java.lang.String" />
+	<typeAlias alias="int" type="java.lang.Integer" />
+	<typeAlias alias="notice" type="com.project.dto.NoticeVO" />
+	
+	<select id="selectNoticeList"  resultClass="notice">
+		select * from notice
+		order by notice_wdate desc
+	</select>
+	<select id="selectNoticeByNo"  resultClass="notice">
+		select * from notice where notice_no = #notice_no#
+	</select>
+	<update id="insertNotice" >
+		insert into notice(notice_no,notice_title,notice_wdate,notice_content) 
+		values(notice_no_seq.nextVal,#notice_title#,sysdate,#notice_content#)
+	</update>
+	<update id="updateNotice">
+		update notice
+		set
+		notice_title=#notice_title#,
+		notice_wdate=sysdate,
+		notice_content=#notice_content#
+		where
+		notice_no=#notice_no#	 
+	</update>
+	<delete id="deleteNotice" parameterClass="str" >
+		delete from notice where notice_no=#notice_no#
+	</delete>
+</sqlMap>
+
+
+
+
+
+
+

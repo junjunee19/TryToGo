@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="CommentsMapper">
+	<select id="selectCommentsList" resultType="comments">
+		select * from comments
+	</select>
+	
+	<select id="selectCommentsByID" resultType="comment">
+	select * from comments
+		where comments_no = #{comments_no}
+	</select>
+	
+	<update id="insertComments">
+		insert into contents(comments_no,comments_type,comments_typesno,comments_content,member_id)
+		values(#{comments_no},
+				#{comments_type},
+				#{comments_typesno},
+				#{comments_content},
+				#{member_id}
+	</update>
+	
+	<update id="updateComments">
+	update comments
+	set
+	comments_content=#{comments_content},
+	comments_wdate=#{comments_wdate},
+	comments_complain=#{comments_complain}
+	
+	</update>
+	
+	<update id="deleteComments" parameterType="int">
+		delete from comments where comments_no=#{comments_no}
+	</update>
+</mapper>
